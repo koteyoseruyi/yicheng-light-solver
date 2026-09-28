@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121923">
+  <title>遗城点灯小游戏求解器</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="shell">
+    <h1>遗城点灯小游戏求解器</h1>
+    <div class="workspace">
+      <section class="card editor-card" aria-labelledby="editor-title">
+        <div class="card-heading">
+          <h2 id="editor-title">棋盘</h2>
+        </div>
+        <p class="hint">点击格子依次切换空白、白色、黄色</p>
+        <div class="board-wrap">
+          <div id="editor-board" class="board editor-board" role="group" aria-label="输入棋盘"></div>
+        </div>
+        <div class="actions">
+          <button id="solve-button" class="button button-primary" type="button">求解</button>
+          <button id="reset-button" class="button button-secondary" type="button">重置棋盘</button>
+          <label class="button button-quiet upload-button" for="image-upload">上传图片</label>
+          <input id="image-upload" class="visually-hidden" type="file" accept="image/*">
+          <span class="paste-hint">也可按 Ctrl+V 粘贴图片</span>
+        </div>
+        <p id="image-status" class="image-status" role="status"></p>
+        <div id="image-panel" class="image-panel" hidden>
+          <canvas id="image-canvas" aria-label="图片识别预览"></canvas>
+          <p id="recognition-message" class="recognition-message" role="status"></p>
+          <div class="image-actions">
+            <button id="apply-recognition-button" class="button button-primary" type="button" disabled>填入棋盘</button>
+            <button id="calibrate-button" class="button button-secondary" type="button">调整定位</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card result-card" aria-labelledby="result-title">
+        <div class="card-heading">
+          <h2 id="result-title">解法</h2>
+          <span id="status-badge" class="status-badge status-idle">等待求解</span>
+        </div>
+        <div id="result-empty" class="result-placeholder">
+          <p>设置棋盘后点击求解</p>
+        </div>
+        <div id="result-content" class="result-content" hidden>
+          <p id="result-summary" class="result-summary" role="status"></p>
+          <div id="solution-view" hidden>
+            <div class="result-subheading"><h3>操作预览</h3><span id="preview-counter">第 0 步</span></div>
+            <div class="preview-layout">
+              <div class="board-wrap preview-wrap"><div id="preview-board" class="board preview-board" role="group" aria-label="解法预览棋盘"></div></div>
+              <div class="steps-panel">
+                <ol id="step-list" class="step-list"></ol>
+              </div>
+            </div>
+            <div class="preview-actions">
+              <button id="previous-button" class="button button-secondary" type="button">上一步</button>
+              <button id="next-button" class="button button-primary" type="button">下一步</button>
+              <button id="restart-preview-button" class="button button-quiet" type="button">从头预览</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
